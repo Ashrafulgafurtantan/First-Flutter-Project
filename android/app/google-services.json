@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "174959505617",
+    "firebase_url": "https://features-explained.firebaseio.com",
+    "project_id": "features-explained",
+    "storage_bucket": "features-explained.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174959505617:android:ae5cf483f52280a15ed5f0",
+        "android_client_info": {
+          "package_name": "ashraf.useallfeatures"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174959505617-ighr0gmqm6vkram8ba9j0qod97g9m3nt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ashraf.useallfeatures",
+            "certificate_hash": "fcc90ff4fca923ab9553a1a9e9b991ede85d2d6d"
+          }
+        },
+        {
+          "client_id": "174959505617-2s06i4912a6bomi5pdbg49srsbjl94m1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnIIyIZGtGxLI4B9V-Zo-gqQL-_MW4mm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174959505617-2s06i4912a6bomi5pdbg49srsbjl94m1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
