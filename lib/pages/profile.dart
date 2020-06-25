@@ -299,7 +299,7 @@ class _ProfileState extends State<Profile> {
                 child: GestureDetector(
 
                   onTap: (){
-                   // print()
+
                     // showProfile(context,profile:user.id);
 
                   },

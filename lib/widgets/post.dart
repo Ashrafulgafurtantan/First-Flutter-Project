@@ -281,15 +281,13 @@ class _PostState extends State<Post> {
     );
   }
 
-  buildPostImage(){
+   buildPostImage(){
     return GestureDetector(
       onDoubleTap:handleLikePost,
       child: Stack(
         alignment: Alignment.center,
 
         children: <Widget>[
-          // imageConfig(mediaUrl),
-          //   CachedNetworkImageProvider(mediaUrl),
           cachedNetworkImage(mediaUrl),
           showHeart ? Animator<double>(
             tween: Tween(begin: 0.8, end: 1.4),
@@ -323,6 +321,24 @@ class _PostState extends State<Post> {
 
     return Column(
       children: <Widget>[
+
+
+        SizedBox(height: 3,),
+        Padding(
+          padding: const EdgeInsets.only(left: 5,bottom: 3),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Expanded(child: Text(location,
+              style: TextStyle(
+                fontSize: 16,
+                letterSpacing: 1,
+              ),
+              ),),
+            ],
+          ),
+        ),
+        SizedBox(height: 4,),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -338,6 +354,7 @@ class _PostState extends State<Post> {
 
           ],
         ),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -361,22 +378,7 @@ class _PostState extends State<Post> {
           ],
 
         ),
-        SizedBox(height: 3,),
-        Padding(
-          padding: const EdgeInsets.only(left: 3,right: 3,bottom: 3),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Expanded(child: Text(location,
-              style: TextStyle(
-                fontSize: 16,
-                letterSpacing: 1,
-              ),
-              ),),
-            ],
-          ),
-        ),
-        SizedBox(height: 4,),
+
         Divider(
           height: 5,
           color: Colors.black26,
@@ -394,7 +396,7 @@ class _PostState extends State<Post> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         buildPostHeader(context),
-        buildPostImage(),
+        noImageUrl == mediaUrl ? Container() : buildPostImage(),
         buildPostFooter(),
       ],
     );

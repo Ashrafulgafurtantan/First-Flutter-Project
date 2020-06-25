@@ -22,6 +22,7 @@ import 'package:storage_path/storage_path.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:storage_path/storage_path.dart';
+String noImageUrl = 'https://firebasestorage.googleapis.com/v0/b/features-explained.appspot.com/o/no_post_image.jpg?alt=media&token=f4a008af-9676-4647-89e2-06805ced2adc';
 
 final StorageReference storageReference=FirebaseStorage.instance.ref();
 
@@ -46,9 +47,6 @@ class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
   List<GridTile>gridTiles=[];
 
 
-
-
-
   getImagesPath() async {
     List<GridTile>tiles=[];
 
@@ -59,8 +57,6 @@ class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
     try {
       imagespath = await StoragePath.imagesPath;
       var response = jsonDecode(imagespath);
-      //  print(response);
-      //  print(imagespath);
 
       var imageList = response as List;
 
@@ -245,7 +241,7 @@ class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
           FlatButton(
 
             onPressed: isUploading ? null : () async {
-              String mediaUrl = 'https://firebasestorage.googleapis.com/v0/b/features-explained.appspot.com/o/hd.jpg?alt=media&token=6791cb4d-ccb9-475b-918e-d5653d76d0af';
+            String mediaUrl = noImageUrl;
             setState(() {
               isUploading=true;
             });
