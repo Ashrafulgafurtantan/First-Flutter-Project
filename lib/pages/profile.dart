@@ -9,6 +9,7 @@ import 'package:useallfeatures/pages/following.dart';
 import 'package:useallfeatures/pages/message_list.dart';
 import 'package:useallfeatures/progress.dart';
 import 'package:useallfeatures/widgets/chat_list_view_item.dart';
+import 'package:useallfeatures/widgets/custom_image.dart';
 import 'package:useallfeatures/widgets/edit_pofile.dart';
 import 'package:useallfeatures/widgets/message.dart';
 import 'package:useallfeatures/widgets/post.dart';
@@ -132,7 +133,7 @@ class _ProfileState extends State<Profile> {
   }
 
   followButton()async{
-    print('in follow');
+   // print('in follow');
     setState(() {
       isFollowing = true;
     });
@@ -150,7 +151,7 @@ class _ProfileState extends State<Profile> {
       });
   }
   unFollowButton(){
-    print('in unfollow');
+   // print('in unfollow');
 
     setState(() {
       isFollowing = false;
@@ -190,6 +191,7 @@ class _ProfileState extends State<Profile> {
         if(!snapshot.hasData)
           return circularProgress();
         User user=User.fromDocument(snapshot.data);
+      //  print('Photo :${user.photoUrl}');
         return Padding(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -198,9 +200,11 @@ class _ProfileState extends State<Profile> {
                 children: <Widget>[
                   CircleAvatar(
                     backgroundImage: CachedNetworkImageProvider(user.photoUrl),
+                  //  backgroundImage: CachedNetworkImageProvider('https://lh3.googleusercontent.com/-vCmutBe19Hk/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucm-7I3bZz_2ZzXow_YvWyylhdMtbw/s96-c/photo.jpg'),
                     backgroundColor: Colors.grey,
                     radius: 30,
                   ),
+                  //cachedNetworkImage(user.photoUrl),
                   Expanded(
                     flex: 1,
                     child: Column(
@@ -228,7 +232,7 @@ class _ProfileState extends State<Profile> {
                              padding: EdgeInsets.only(top: 2),
                              child: FlatButton(
                                onPressed: (){
-                                 print('message button');
+                             //    print('message button');
                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Message(profileId: widget.profileId,username:user.displayname)));
                                },
                                child: Container(

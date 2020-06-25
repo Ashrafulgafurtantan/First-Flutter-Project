@@ -34,21 +34,21 @@ class _MessageListState extends State<MessageList> {
 
     DocumentSnapshot  snapshot =await  friendRef.document (currentUser.id).get();
     likes = snapshot.data['friends'];
-    print(likes.length);
+   // print(likes.length);
     likes.forEach((key, value) async{
 
-      print(currentUser.id);
-      print(key);
+     // print(currentUser.id);
+      //print(key);
    //   if(value==true){
         Test test;
-        print('hell');
+    //    print('hell');
 
         userSnapshot =await userRef.document(key).snapshots();
 
        userSnapshot.forEach((doc) async{
-         print('hell 2');
+      //   print('hell 2');
           test = Test.fromDocument(doc);
-         print(test.name);
+        // print(test.name);
 
        });
 
@@ -60,7 +60,7 @@ class _MessageListState extends State<MessageList> {
             isOwner: ( currentUser.id== documentSnapshot.documents.last.data['senderId']) ? true:false,
         );
 
-        print(best.lastMessage);
+    //    print(best.lastMessage);
       //  documentSnapshot.documents.forEach((doc)async {
           ChatListViewItem chatListViewItem = ChatListViewItem(
             name:test.name,

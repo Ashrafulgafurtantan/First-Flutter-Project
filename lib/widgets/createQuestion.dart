@@ -132,12 +132,7 @@ class _CreateQuestionState extends State<CreateQuestion> {
       body: new Stack(
         children: <Widget>[
           Column(
-
-        //    mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-
-            //  file ==null ? Text('File null'):
-
           file==null ? Container():    Container(
                 height: 180,
                 width: MediaQuery.of(context).size.width*0.8,

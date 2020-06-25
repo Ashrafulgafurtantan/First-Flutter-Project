@@ -61,6 +61,7 @@ class _HomeState extends State<Home> {
     },onError: (e){
       // print(e.toString());
     });
+   // print('Photo :${currentUser.photoUrl}');
 
   }
   getNotifications()async{
@@ -225,9 +226,6 @@ class _HomeState extends State<Home> {
           print('Notification Shown');
 
           print('message count ${messageList.length}');
-          /*      setState(() {
-            notificationCount++;
-          });*/
           SnackBar snackBar=SnackBar(
             elevation: 5,
             shape: RoundedRectangleBorder(
@@ -247,8 +245,6 @@ class _HomeState extends State<Home> {
             ),
           );
           _scaffoldKey.currentState.showSnackBar(snackBar);
-
-
         }
       },);
   }

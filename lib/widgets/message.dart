@@ -93,8 +93,9 @@ class _MessageState extends State<Message> {
   void initState() {
     controller=TextEditingController();
     super.initState();
+    seeStatus();
 
-    print('message');
+  //  print('message');
    messageList.remove(widget.username);
     isFriendListed();
   }
@@ -108,7 +109,7 @@ class _MessageState extends State<Message> {
       }
       else{
         setState(() {
-          isBlocked = true;
+          isBlocked = false;
         });
       }
 
@@ -132,6 +133,23 @@ class _MessageState extends State<Message> {
  });
 
   }
+
+  seeStatus()async{
+     Stream<DocumentSnapshot> snapshot =  await friendRef.document(currentUser.id).snapshots();
+     snapshot.forEach((doc) {
+     Map friendList =   doc.data['friends'];
+   //  print('status: ${friendList[widget.profileId]}');
+     setState(() {
+       isBlocked = !friendList[widget.profileId];
+     });
+
+
+   });
+
+
+  }
+
+
   unBlockFriendFromFirebase()async{
     await   friendRef.document(currentUser.id).updateData({
       'friends.${widget.profileId}':true,
@@ -285,7 +303,7 @@ class MessageBubble extends StatelessWidget {
   deleteMessage()async{
     double timeLaps =( (DateTime.now().millisecondsSinceEpoch)-(timestamp.millisecondsSinceEpoch)).toDouble();
     timeLaps = timeLaps/1000;
-    print(timeLaps);
+ //   print(timeLaps);
 
     if(timeLaps<600){
       await messageRef.document ( senderId ).collection ( receiverId).document(messageId).get().then((value) {

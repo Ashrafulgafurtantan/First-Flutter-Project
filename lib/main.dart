@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:useallfeatures/home.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+ // WidgetsFlutterBinding.ensureInitialized();
  // Firestore.instance.settings(timestampsInSnapshotsEnabled :true);
 
 
