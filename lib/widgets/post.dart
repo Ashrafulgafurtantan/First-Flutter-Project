@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:useallfeatures/models/user.dart';
 import 'package:useallfeatures/pages/profile.dart';
 import 'package:useallfeatures/pages/upload.dart';
@@ -348,7 +349,7 @@ class _PostState extends State<Post> {
 
             ),
             SizedBox(width: 10,),
-            IconButton(icon: Icon(Icons.chat,color: Colors.teal[700],),
+            IconButton(icon: Icon(FontAwesomeIcons.comment,color: Colors.teal[700],),
               onPressed: comment,
             ),
 

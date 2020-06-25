@@ -8,7 +8,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as Im;
 import 'package:useallfeatures/home.dart';
@@ -16,6 +15,7 @@ import 'package:useallfeatures/models/user.dart';
 import 'package:useallfeatures/progress.dart';
 import 'package:uuid/uuid.dart';
 import 'package:storage_path/storage_path.dart';
+import 'package:image_picker/image_picker.dart';
 
 
 
@@ -37,6 +37,7 @@ class Upload extends StatefulWidget {
 
 class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
 <Upload>{
+  ImagePicker picker;
   File file;
   bool fileNull =true;
   bool isUploadScreen = false;
@@ -107,19 +108,22 @@ class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
 
 
   fromGalleryHandle()async{
-    Navigator.pop(context);
-    File f=await ImagePicker.pickImage(source: ImageSource.gallery, maxWidth: 960,maxHeight: 675);
-    if(f!=null)
-    //  print('file not null');
+    final f =  await picker.getImage(source: ImageSource.gallery);
     setState(() {
-      file=f;
+      file=File(f.path);
+
+      //file = f;
+      fileNull = false;
+
     });
   }
   fromCameraHandle()async{
-    Navigator.pop(context);
-    File f=await ImagePicker.pickImage(source: ImageSource.camera, maxWidth: 960,maxHeight: 675);
+  //  File f=await ImagePicker.pickImage(source: ImageSource.camera, maxWidth: 960,maxHeight: 675);
+    final f = await picker.getImage(source:ImageSource.camera );
     setState(() {
-      file=f;
+      file=File(f.path);
+      fileNull = false;
+
     });
   }
 
@@ -441,6 +445,46 @@ class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
                               ),
                             ),
                           ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                            //  crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment:MainAxisAlignment.center,
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap:fromCameraHandle,
+
+                                  child: Container(
+                                    width:100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+
+                                      image: DecorationImage(
+                                        image: AssetImage('assets/images/camera.png'),
+                                        fit: BoxFit.cover
+                                      )
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 15,),
+                                GestureDetector(
+                                  onTap:fromGalleryHandle,
+                                  child: Container(
+                                    width:100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage('assets/images/gallery.png'),
+                                            fit: BoxFit.cover
+                                        )
+                                    ),
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ),
                           SizedBox(height: 10,),
                           GridView.count(
                             crossAxisCount: 3,
@@ -466,14 +510,15 @@ class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
   @override
   void initState() {
     super.initState ( );
+     picker = ImagePicker();
+
     locationController = TextEditingController();
     captionController = TextEditingController();
     getImagesPath();
   }
 
+
   bool get wantKeepAlive =>true;
-
-
   Widget build(BuildContext context) {
 
     super.build(context);
