@@ -8,8 +8,6 @@ import 'package:useallfeatures/pages/follower.dart';
 import 'package:useallfeatures/pages/following.dart';
 import 'package:useallfeatures/pages/message_list.dart';
 import 'package:useallfeatures/progress.dart';
-import 'package:useallfeatures/widgets/chat_list_view_item.dart';
-import 'package:useallfeatures/widgets/custom_image.dart';
 import 'package:useallfeatures/widgets/edit_pofile.dart';
 import 'package:useallfeatures/widgets/message.dart';
 import 'package:useallfeatures/widgets/post.dart';
@@ -102,9 +100,9 @@ class _ProfileState extends State<Profile> {
             ),
           ),
           decoration: BoxDecoration(
-            color:isFollowing ? Colors.white:  Colors.blue,
+            color:isFollowing ? Colors.white:  Colors.teal,
            // color:Colors.blue,
-            border: Border.all(color: isFollowing ? Colors.grey: Colors.blue),
+            border: Border.all(color: isFollowing ? Colors.grey: Colors.teal),
            // border: Border.all(color: Colors.blue),
             borderRadius: BorderRadius.circular(5),
           ),
@@ -472,7 +470,7 @@ class _ProfileState extends State<Profile> {
 
 //    appBar: header(context,isTimeline: true,title: 'Profile'),
         appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.teal,
 
           title: Center(child: Text('Profile',
           style: TextStyle(
@@ -505,7 +503,7 @@ class _ProfileState extends State<Profile> {
                       child: new Container(
                         padding: EdgeInsets.all(1),
                         decoration: new BoxDecoration(
-                          color: Colors.red,
+                          color: Colors.cyan,
                           borderRadius: BorderRadius.circular(6),
                         ),
                         constraints: BoxConstraints(
@@ -517,6 +515,7 @@ class _ProfileState extends State<Profile> {
 
                           style: new TextStyle(
                             color: Colors.white,
+                            fontWeight: FontWeight.bold,
                             fontSize: 8,
                           ),
                           textAlign: TextAlign.center,
@@ -535,46 +534,17 @@ class _ProfileState extends State<Profile> {
           ],
 
         ),
-        //
 
-        /*     icon: new Stack(
-              children: <Widget>[
-                new Icon(Icons.notifications),
-                notificationCount<1? Container(child: Text(''),):new Positioned(
-                  right: 0,
-                  child: new Container(
-                    padding: EdgeInsets.all(1),
-                    decoration: new BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    constraints: BoxConstraints(
-                      minWidth: 12,
-                      minHeight: 12,
-                    ),
-                    child: new Text( notificationCount.toString(),
-                      style: new TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                )
-              ],
-            ),
-
-
-            */
-
-        body: ListView(
+        body: Container(
+          child: ListView(
       children: <Widget>[
-        buildProfileHeader(context),
-        Divider(height: 0,),
-        toggleOptions(),
-        buildProfilePost(),
+          buildProfileHeader(context),
+          Divider(height: 0,),
+          toggleOptions(),
+          buildProfilePost(),
       ],
-    )
+    ),
+        )
     );
   }
 }

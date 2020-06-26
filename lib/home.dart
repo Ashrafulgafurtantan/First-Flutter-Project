@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:useallfeatures/pages/message_list.dart';
 import 'package:useallfeatures/pages/timeline.dart';
-
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:useallfeatures/pages/activity.dart';
 import 'package:useallfeatures/pages/profile.dart';
@@ -343,52 +343,49 @@ class _HomeState extends State<Home> {
           physics: NeverScrollableScrollPhysics(),
 
         ),
-        bottomNavigationBar: CupertinoTabBar(
-          // backgroundColor: Theme.of(context).accentColor,
-          currentIndex: pageIndex,
-          onTap: onTap,
-          activeColor: Theme.of(context).primaryColor,
-          items: [
-            BottomNavigationBarItem( icon:Icon(Icons.whatshot), ),
-            // BottomNavigationBarItem( icon:Icon(Icons.notifications_active), ),
-
-            BottomNavigationBarItem(
-              icon: new Stack(
-                children: <Widget>[
-                  new Icon(Icons.notifications),
-                  notificationCount<1? Container(child: Text(''),):new Positioned(
-                    right: 0,
-                    child: new Container(
-                      padding: EdgeInsets.all(1),
-                      decoration: new BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      constraints: BoxConstraints(
-                        minWidth: 12,
-                        minHeight: 12,
-                      ),
-                      child: new Text( notificationCount.toString(),
-                        style: new TextStyle(
-                          color: Colors.white,
-                          fontSize: 8,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        index: pageIndex,
+        onTap: onTap,
+      //  color: Theme.of(context).primaryColor,
+        color: Theme.of(context).accentColor,
+        buttonBackgroundColor: Colors.teal,
+        backgroundColor: Colors.white,
+        animationCurve: Curves.easeInOut,
+        animationDuration: Duration(milliseconds: 600),
+        items:[
+          Icon(Icons.whatshot,color: Colors.white,),
+         Stack(
+            children: <Widget>[
+              new Icon(Icons.notifications,color: Colors.white,),
+              notificationCount<1? Container(child: Text(''),):new Positioned(
+                right: 0,
+                child: new Container(
+                  padding: EdgeInsets.all(1),
+                  decoration: new BoxDecoration(
+                    color: Colors.cyan,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 12,
+                    minHeight: 12,
+                  ),
+                  child: new Text( notificationCount.toString(),
+                    style: new TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 8,
                     ),
-                  )
-                ],
-              ),
-            ),
-            BottomNavigationBarItem( icon:Icon(Icons.camera_alt,size: 35,), ),
-            BottomNavigationBarItem( icon:Icon(Icons.search), ),
-            BottomNavigationBarItem( icon:Icon(Icons.account_circle), ),
-
-
-
-          ],
-
-        )
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+            ],
+          ),
+          Icon(Icons.camera_alt,size: 35,color: Colors.white,),
+          Icon(Icons.search,color: Colors.white,),
+          Icon(Icons.account_circle,color: Colors.white,),
+        ],
+      ),
     );
   }
 

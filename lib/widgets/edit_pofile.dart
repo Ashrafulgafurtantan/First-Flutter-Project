@@ -160,7 +160,7 @@ class _EditProfileState extends State<EditProfile> {
       body: isLoading ?  shimmer() :ListView(
         children: <Widget>[
           Column(
-            //    mainAxisAlignment: MainAxisAlignment.center,
+             mainAxisAlignment: MainAxisAlignment.center,
             //     crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Padding(padding: EdgeInsets.only(top:16,bottom: 8),

@@ -7,6 +7,8 @@ import 'package:useallfeatures/home.dart';
 import 'package:useallfeatures/progress.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
+import 'package:emoji_picker/emoji_picker.dart';
+
 class Message extends StatefulWidget {
 
   final String profileId;
@@ -138,15 +140,10 @@ class _MessageState extends State<Message> {
      Stream<DocumentSnapshot> snapshot =  await friendRef.document(currentUser.id).snapshots();
      snapshot.forEach((doc) {
      Map friendList =   doc.data['friends'];
-   //  print('status: ${friendList[widget.profileId]}');
      setState(() {
        isBlocked = !friendList[widget.profileId];
      });
-
-
    });
-
-
   }
 
 

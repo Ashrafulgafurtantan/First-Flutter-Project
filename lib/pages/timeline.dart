@@ -47,8 +47,6 @@ class _TimelineState extends State<Timeline> {
       );
 
     }
-
-
   }
   buildUserToFollow(){
     return StreamBuilder(
@@ -142,7 +140,7 @@ class _TimelineState extends State<Timeline> {
                 elevation: 10,
 
                 splashColor: Colors.white,
-                color: Colors.teal[700],
+                color: Colors.teal,
                 icon: Icon(Icons.edit,size: 25,
                   color: Colors.white,
                 ),

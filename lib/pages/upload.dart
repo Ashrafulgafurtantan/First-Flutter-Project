@@ -281,6 +281,8 @@ class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
       body: Stack(
         children: <Widget>[
           ListView(
+            //  physics: NeverScrollableScrollPhysics(),
+           //   shrinkWrap: true,
 
             children: <Widget>[
               isUploading ? linearProgress() :Text(''),
@@ -501,7 +503,6 @@ class _UploadState extends State<Upload> with AutomaticKeepAliveClientMixin
                   },
                 ) ,
               ),
-
         ],
       ),
     );
