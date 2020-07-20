@@ -173,8 +173,6 @@ class _ProfileState extends State<Profile> {
 
   }
 
-
-
   editProfile(){
     Navigator.push(context,MaterialPageRoute(builder: (context){
       return EditProfile();
@@ -183,13 +181,19 @@ class _ProfileState extends State<Profile> {
 
 
   buildProfileHeader(BuildContext context){
-    return FutureBuilder(
+    print('profileHeader');
+     print(userRef.document(widget.profileId).documentID);
+     //final DocumentSnapshot dc = await userRef.document(widget.profileId).get();
+
+     //print(dc.data);
+
+    return FutureBuilder<DocumentSnapshot>(
       future:userRef.document(widget.profileId).get() ,
       builder: (context,snapshot){
         if(!snapshot.hasData)
           return circularProgress();
         User user=User.fromDocument(snapshot.data);
-      //  print('Photo :${user.photoUrl}');
+        print('Photo :${user.toString()}');
         return Padding(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -198,7 +202,6 @@ class _ProfileState extends State<Profile> {
                 children: <Widget>[
                   CircleAvatar(
                     backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-                  //  backgroundImage: CachedNetworkImageProvider('https://lh3.googleusercontent.com/-vCmutBe19Hk/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucm-7I3bZz_2ZzXow_YvWyylhdMtbw/s96-c/photo.jpg'),
                     backgroundColor: Colors.grey,
                     radius: 30,
                   ),

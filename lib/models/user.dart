@@ -11,8 +11,7 @@ class User {
   User(this.username,this.displayname,this.id,this.email,this.bio,this.photoUrl);
 
   factory User.fromDocument(DocumentSnapshot doc){
-
-    return User(doc['username'], doc['displayname'], doc['id'], doc['email'], doc['bio'], doc['photoUrl']);
+    return User(doc['name'], doc['displayName'], doc['id'], doc['email'], doc['bio'], doc['photo']);
   }
 
   @override

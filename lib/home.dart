@@ -114,6 +114,7 @@ class _HomeState extends State<Home> {
   handleSignIn(GoogleSignInAccount data)async{
 
     if(data !=null){
+      print("age theke e ache shob");
       await createUserInFirestore();
 
       setState(() {
@@ -267,11 +268,11 @@ class _HomeState extends State<Home> {
     if(!doc.exists){
       final userName= await Navigator.push(context,MaterialPageRoute(builder: (context){
 
-        return CreateAccount();
+        return CreateAccount(user:  user,);
 
       }));
 
-      userRef.document(user.id).setData({
+     /* userRef.document(user.id).setData({
         'id': user.id,
         'name':userName,
         'photo': user.photoUrl,
@@ -283,11 +284,11 @@ class _HomeState extends State<Home> {
       });
 
       await followersRef.document(user.id)
-          .collection('userFollowers').document(user.id).setData({});
+          .collection('userFollowers').document(user.id).setData({});*/
       doc=await userRef.document(user.id).get();
     }
     currentUser=User.fromDocument(doc);
-    currentUser.toString();
+    print("Ekhe e shob bujha jabe"+currentUser.toString());
 
     DocumentSnapshot friendList=await friendRef.document(currentUser.id).get();
     if(!friendList.exists){
@@ -330,9 +331,6 @@ class _HomeState extends State<Home> {
           children: <Widget>[
 
             Timeline(),
-            /*    RaisedButton(onPressed: SignOut,
-            child: Text('Logout'),
-          ),*/
             ActivityFeed(),
             Upload(currentUser),
             Search(),
@@ -345,8 +343,8 @@ class _HomeState extends State<Home> {
         ),
       bottomNavigationBar: CurvedNavigationBar(
         index: pageIndex,
+        height: 55,
         onTap: onTap,
-      //  color: Theme.of(context).primaryColor,
         color: Theme.of(context).accentColor,
         buttonBackgroundColor: Colors.teal,
         backgroundColor: Colors.white,

@@ -34,14 +34,8 @@ class _MessageListState extends State<MessageList> {
 
     DocumentSnapshot  snapshot =await  friendRef.document (currentUser.id).get();
     likes = snapshot.data['friends'];
-   // print(likes.length);
     likes.forEach((key, value) async{
-
-     // print(currentUser.id);
-      //print(key);
-   //   if(value==true){
         Test test;
-    //    print('hell');
 
         userSnapshot =await userRef.document(key).snapshots();
 
@@ -52,7 +46,7 @@ class _MessageListState extends State<MessageList> {
 
        });
 
-        documentSnapshot =await messageRef.document(currentUser.id).collection(key).orderBy('timestamp', descending: false).getDocuments();
+        QuerySnapshot  documentSnapshot =await messageRef.document(currentUser.id).collection(key).orderBy('timestamp', descending: false).getDocuments();
 
         Best best = Best(
             timestamp: documentSnapshot.documents.last.data['timestamp'],
@@ -121,59 +115,6 @@ class _MessageListState extends State<MessageList> {
   }
 }
 
-
-/* if (isLoading == true) {
-      return shimmer();
-    } else {
-      return Container(
-        child: Scaffold(
-          backgroundColor: Color(0xFF54C5E6),
-          appBar: AppBar(
-            elevation: 0,
-            iconTheme: IconThemeData(
-              color: Colors.white,
-            ),
-            centerTitle: true,
-            title: Text(
-              'Chats',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-          ),
-          body: Container(
-            child: Container(
-              decoration: BoxDecoration(
-                  color:Color(0xFFFbFbFb),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15.0),
-                    topRight: Radius.circular(15.0),
-                  )),
-              child: ListView(
-                children: <Widget>[
-                  ChatListViewItem(
-                    hasUnreadMessage: true,
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Bree Jarvis",
-                    newMesssageCount: 8,
-                    time: "19:27 PM",
-                  ),
-
-                  ChatListViewItem(
-                    hasUnreadMessage: false,
-                    lastMessage:
-                    "Lorem ipsum dolor sit amet. Sed pharetra ante a blandit ultrices.",
-                    name: "Carson Sinclair",
-                    newMesssageCount: 0,
-                    time: "19:27 PM",
-                  ),
-
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }*/
 
 
 class Test{

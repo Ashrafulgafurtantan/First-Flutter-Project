@@ -29,29 +29,28 @@ class _TimelineState extends State<Timeline> {
     QuerySnapshot snapshot =await followingRef.document(currentUser.id).collection('userFollowing').getDocuments();
     setState(() {
       followingList = snapshot.documents.map((doc) => doc.documentID).toList();
-
     });
-
-
   }
   buildTimeline(){
     if(postList ==null){
       return circularProgress();
 
     }
-    else if(postList.isEmpty)
-      return buildUserToFollow();
+    else if(postList.isEmpty){
+       return buildUserToFollow();
+
+
+    }
+
     else{
       return  ListView(
         children: postList,
       );
-
     }
   }
   buildUserToFollow(){
-    return StreamBuilder(
-      stream: userRef.orderBy('timestamp',descending: true).limit(30)
-          .snapshots(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: userRef.orderBy('timestamp',descending: true).limit(30).snapshots(),
       builder: (context,snapshot){
 
         if(!snapshot.hasData)
@@ -66,7 +65,7 @@ class _TimelineState extends State<Timeline> {
           if(isAuth){return;}
           else if(isFollowing){return;}
           else{
-            SearchResult userResult=SearchResult(user: user,);
+            SearchResult userResult=SearchResult(user: user);
             searchResult.add(userResult);
           }
         });
@@ -114,13 +113,12 @@ class _TimelineState extends State<Timeline> {
     QuerySnapshot snapshot = await timelineRef.document(currentUser.id)
         .collection('timelinePosts').orderBy('timestamp',descending: true)
         .getDocuments();
+
     List<Post> p =snapshot.documents.map((doc)=>Post.fromDocument(doc)).toList();
 
     setState(() {
       postList=p;
     });
-
-
   }
 
   @override

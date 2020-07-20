@@ -41,9 +41,7 @@ class _FollowerState extends State<Follower> {
         setState(() {
           searchResults=sr;
         });
-
       });
-
     });
   }
 

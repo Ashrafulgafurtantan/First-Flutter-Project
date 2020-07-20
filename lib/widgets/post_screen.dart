@@ -25,12 +25,14 @@ class _PostScreenState extends State<PostScreen> {
           Post post = Post.fromDocument(snapshot.data);
           return Scaffold(
            // appBar: header(context,removeBackButton: true,title: post.location),
-            body: ListView(
-              children: <Widget>[
-                Container(
-                  child: post,
-                )
-              ],
+            body: SafeArea(
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    child: post,
+                  )
+                ],
+              ),
             ),
           );
         },

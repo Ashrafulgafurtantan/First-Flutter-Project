@@ -6,10 +6,6 @@ import 'package:useallfeatures/home.dart';
 import 'package:useallfeatures/models/user.dart';
 import 'package:useallfeatures/pages/profile.dart';
 import 'package:useallfeatures/progress.dart';
-
-
-
-
 class Search extends StatefulWidget {
   @override
   _SearchState createState() => _SearchState();
@@ -28,7 +24,7 @@ class _SearchState extends State<Search> {
       s+=query[i];
     }
     query=s;
-    Future <QuerySnapshot> users=userRef.where('displayname',isGreaterThanOrEqualTo: query).limit(7).getDocuments();
+    Future <QuerySnapshot> users=userRef.where('displayName',isGreaterThanOrEqualTo: query).limit(7).getDocuments();
 
     setState(() {
       searchResultFuture=users;
@@ -70,6 +66,7 @@ class _SearchState extends State<Search> {
         if(!snapshot.hasData)
           return circularProgress();
         List<SearchResult>searchResults=[];
+        print(snapshot.data.documents.length);
         snapshot.data.documents.forEach((doc) {
           User user=User.fromDocument(doc);
           SearchResult searchResult=SearchResult(user: user);
@@ -175,11 +172,8 @@ class SearchResult extends StatelessWidget {
            height: 2,
            color: Colors.white54,
          ),
-
        ],
      ),
-
-
     );
   }
 }

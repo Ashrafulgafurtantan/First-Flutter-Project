@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:useallfeatures/header.dart';
@@ -7,7 +8,6 @@ import 'package:useallfeatures/home.dart';
 import 'package:useallfeatures/progress.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
-import 'package:emoji_picker/emoji_picker.dart';
 
 class Message extends StatefulWidget {
 
@@ -23,7 +23,7 @@ class _MessageState extends State<Message> {
 
   TextEditingController controller;
 
- // bool isFriend = false;
+  // bool isFriend = false;
   bool isBlocked = false;
 
   addMessage()async{
@@ -97,8 +97,8 @@ class _MessageState extends State<Message> {
     super.initState();
     seeStatus();
 
-  //  print('message');
-   messageList.remove(widget.username);
+    //  print('message');
+    messageList.remove(widget.username);
     isFriendListed();
   }
   isFriendListed()async{
@@ -122,28 +122,28 @@ class _MessageState extends State<Message> {
 
   blockFriendFromFirebase()async{
 
- await   friendRef.document(currentUser.id).updateData({
+    await   friendRef.document(currentUser.id).updateData({
       'friends.${widget.profileId}':false,
     });
- setState(() {
-   isBlocked = true;
- });
+    setState(() {
+      isBlocked = true;
+    });
 
- friendRef.document ( widget.profileId ).updateData ( {
-   'friends.${currentUser.id}':false,
+    friendRef.document ( widget.profileId ).updateData ( {
+      'friends.${currentUser.id}':false,
 
- });
+    });
 
   }
 
   seeStatus()async{
-     Stream<DocumentSnapshot> snapshot =  await friendRef.document(currentUser.id).snapshots();
-     snapshot.forEach((doc) {
-     Map friendList =   doc.data['friends'];
-     setState(() {
-       isBlocked = !friendList[widget.profileId];
-     });
-   });
+    Stream<DocumentSnapshot> snapshot =  await friendRef.document(currentUser.id).snapshots();
+    snapshot.forEach((doc) {
+      Map friendList =   doc.data['friends'];
+      setState(() {
+        isBlocked = !friendList[widget.profileId];
+      });
+    });
   }
 
 
@@ -179,7 +179,7 @@ class _MessageState extends State<Message> {
                 onPressed: (){
 
                   Navigator.pop(context);
-                isBlocked ?  unBlockFriendFromFirebase() : blockFriendFromFirebase();
+                  isBlocked ?  unBlockFriendFromFirebase() : blockFriendFromFirebase();
 
                 },),
               SimpleDialogOption(child: Text('No'),onPressed: ()=>Navigator.pop(context),),
@@ -193,18 +193,18 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   //   appBar: header(context,title: widget.username,isTimeline: true,removeBackButton: true),
+      //   appBar: header(context,title: widget.username,isTimeline: true,removeBackButton: true),
       appBar: AppBar(
         backgroundColor: Colors.teal,
 
         title:Center(
           child: Text(widget.username,
-          style: TextStyle(
-            fontFamily: 'Pacifico',
-            color: Colors.white,
-            fontSize: 25,
-            letterSpacing: 2,
-          ),
+            style: TextStyle(
+              fontFamily: 'Pacifico',
+              color: Colors.white,
+              fontSize: 25,
+              letterSpacing: 2,
+            ),
           ),
         ) ,
         actions: <Widget>[
@@ -228,10 +228,10 @@ class _MessageState extends State<Message> {
         child: Column(
           children: <Widget>[
             Expanded(child: buildMessage(),),
-            Divider(height: 0, color: Colors.black26),
+        //    Divider(height: 0, color: Colors.teal),
             // SizedBox(
             //   height: 50,
-            Container(
+            /*  Container(
               color: Colors.white,
               height: 50,
               child: Padding(
@@ -264,7 +264,63 @@ class _MessageState extends State<Message> {
                   ),
                 ),
               ),
-            ),
+            ),*/
+
+            Row(
+
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xFFe0f2f1),
+                        borderRadius: BorderRadius.all(Radius.circular(20))
+                    ),
+                    child: TextField(
+                      cursorColor: Colors.teal,
+                      enabled: !isBlocked,
+                 //     maxLines: 20,
+                      controller: controller,
+                      decoration: InputDecoration(
+                        // contentPadding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        prefixIcon: IconButton(
+                          icon: Icon(FontAwesomeIcons.smile,color: Colors.teal,size: 23),
+                        ),
+                        suffixIcon:IconButton(
+                          icon: Icon(Icons.attach_file,color: Colors.teal,size: 23,),
+
+                        ),
+                        border: InputBorder.none,
+                        hintText: isBlocked ? 'You have Blocked ${widget.username}' : "Enter your message",
+                        hintStyle: TextStyle(
+                          color: isBlocked ? Colors.red : Colors.teal,
+                          fontWeight: isBlocked ? FontWeight.bold:FontWeight.normal,
+                          fontFamily: isBlocked ? 'Romanesco': null ,
+                          fontSize: isBlocked ? 20:null,
+                          letterSpacing: isBlocked ? 2:null,
+
+                        ),
+                      ),
+
+                    ),
+                  ),
+                ),
+
+                isBlocked ? IconButton( icon: Icon(Icons.announcement,color: Colors.teal),
+                  onPressed: ()=>print('more options'),
+                ): Container(
+                  width: 50,
+                  height: 50,
+                  child: IconButton(icon: Icon(Icons.send, size: 25,color: Colors.teal,),
+                    onPressed:addMessage,
+                  ),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFe0f2f1)),
+                )
+
+
+              ],
+            )
 
           ],
         ),
@@ -300,7 +356,7 @@ class MessageBubble extends StatelessWidget {
   deleteMessage()async{
     double timeLaps =( (DateTime.now().millisecondsSinceEpoch)-(timestamp.millisecondsSinceEpoch)).toDouble();
     timeLaps = timeLaps/1000;
- //   print(timeLaps);
+    //   print(timeLaps);
 
     if(timeLaps<600){
       await messageRef.document ( senderId ).collection ( receiverId).document(messageId).get().then((value) {
@@ -369,7 +425,7 @@ class MessageBubble extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
                 child: Text(message,
                   style: TextStyle(
-                //    fontWeight: FontWeight.bold,
+                    //    fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color:currentUser.id ==senderId? Colors.white: Colors.teal,
                   ),
